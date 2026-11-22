@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flash LXFM-1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .flash { max-width: 720px; }
+  .flash ol { padding-left: 22px; }
+  .flash li { margin-bottom: 18px; }
+  .flash li h3 { font: 600 18px/1.3 var(--body); margin: 0 0 4px; }
+  #go { font: 22px var(--display); padding: 18px 34px; background: var(--red); color: #fff; border: 0; border-radius: 4px;
+    cursor: pointer; margin: 10px 0 14px; }
+  #go:disabled { background: #3a1a1e; color: #8a7070; cursor: default; }
+  #go:not(:disabled):hover { filter: brightness(1.15); }
+  progress { width: 100%; height: 14px; accent-color: var(--red); }
+  #status { font: 15px var(--mono); color: var(--text); min-height: 1.6em; }
+  .risk { color: var(--muted); font-size: 15px; }
+  details { margin-top: 28px; color: var(--muted); }
+  pre { background: #000; border: 1px solid var(--line); padding: 12px; font: 12px/1.5 var(--mono); color: var(--red);
+    max-height: 260px; overflow: auto; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">LXFM-1</a>
+    <nav aria-label="Sections"><a href="./">Back to the site</a></nav>
+  </header>
+  <main class="flash">
+    <h1 style="font: clamp(40px, 9vw, 72px)/1 var(--display); color: var(--red); margin: 24px 0 8px;">Flash LXFM-1</h1>
+    <p>Install LXFM-1 1.4 on your FM-1 straight from this page, over the USB cable. It takes a few minutes.</p>
+    <ol>
+      <li><h3>Use Chrome or Edge on a computer</h3><p>The page talks to the FM-1 over Web MIDI, which these browsers support.</p></li>
+      <li><h3>Connect the FM-1</h3><p>Use a USB data cable straight to the computer. Close other apps that use MIDI.</p></li>
+      <li><h3>Install</h3>
+        <p>Keep the cable in and this page open until it says Done. The FM-1 restarts by itself. When the browser asks, allow MIDI (SysEx) access.</p>
+        <button id="go" disabled>Install</button>
+        <progress id="bar" max="100" value="0"></progress>
+        <p id="status" role="status">Loading the firmware…</p>
+      </li>
+    </ol>
+    <p class="risk">You install LXFM-1 at your own risk. To go back, flash M-VAVE's official firmware with M-UPGRADE (<a href="https://www.m-vave.com/download">www.m-vave.com/download</a>). If the FM-1 stops answering, see the <a href="https://github.com/DeadActive/hortator/blob/main/docs/RECOVERY.md">recovery guide</a>.</p>
+    <details>
+      <summary>Technical log</summary>
+      <pre id="log"></pre>
+    </details>
+  </main>
+  <footer>
+    <p>The installer is Hortator's USB-MIDI updater (DeadActive; Leo Kuroshita / Hügelton Instruments), GPL-3.0, no warranty.
+      <a href="https://github.com/Narti-Live/lxfm-1">Source on GitHub</a>.</p>
+  </footer>
+</div>
+<script type="module" src="flash.js"></script>
+</body>
+</html>
