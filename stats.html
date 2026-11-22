@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>LXFM-1 stats</title>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin: 30px 0; }
+  .stat { border: 1px solid var(--line); border-radius: 6px; padding: 22px; }
+  .stat b { display: block; font: clamp(40px, 10vw, 64px)/1 var(--display); color: var(--red); margin-bottom: 8px; }
+  .stat span { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="brand" href="./">LXFM-1</a><nav><a href="./">Back to the site</a></nav></header>
+  <main>
+    <h1 style="font: clamp(36px, 8vw, 60px)/1 var(--display); color: var(--red); margin: 24px 0 0;">Stats</h1>
+    <div class="stats">
+      <div class="stat"><b id="visitors">…</b><span>People (different browsers)</span></div>
+      <div class="stat"><b id="home-visits">…</b><span>Visits to the main page</span></div>
+      <div class="stat"><b id="flash-visits">…</b><span>Visits to the flasher</span></div>
+    </div>
+    <p class="note">Counted since the counter was added on 22 November 2026. A visit is one browser session; a person is counted once per browser, so the same person on phone and computer counts twice. Ad blockers can stop the count.</p>
+  </main>
+</div>
+<script>
+  ["visitors", "home-visits", "flash-visits"].forEach(function (k) {
+    fetch("https://abacus.jasoncameron.dev/get/narti-live-lxfm1/" + k)
+      .then(function (r) { return r.ok ? r.json() : { value: 0 }; })
+      .then(function (d) { document.getElementById(k).textContent = d.value || 0; })
+      .catch(function () { document.getElementById(k).textContent = "?"; });
+  });
+</script>
+</body>
+</html>
