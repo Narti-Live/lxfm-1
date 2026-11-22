@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LXFM-1 Firmware</title>
+<meta name="description" content="LXFM-1: a dub techno drum machine firmware for the M-VAVE FM-1, by Narti Live.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">LXFM-1</a>
+    <nav aria-label="Sections">
+      <a href="#kit">Kit</a><a href="#panel">Panel</a><a href="#patterns">Patterns</a><a href="#midi">MIDI</a>
+      <a href="#app">App</a><a href="#install">Install</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>LXFM-1</h1>
+      <p class="sub">Dub techno drum machine firmware for the M-VAVE FM-1.</p>
+      <p class="by">By <a href="https://www.instagram.com/narti_live/">Narti Live</a>. Free and open source (GPL-3.0).</p>
+      <div class="cta">
+        <a class="btn primary" href="downloads/LXFM-1-1.4.fwsc">Download firmware 1.4</a>
+        <a class="btn" href="downloads/LXFM-1-Control.apk">Android app</a>
+      </div>
+      <div class="follow" aria-label="Narti Live online">
+        <a class="tilt big ig" href="https://www.instagram.com/narti_live/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" class="dot"/></svg><span><b>Instagram</b>@narti_live</span></a>
+        <a class="tilt big yt" href="https://youtube.com/@narti_live"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" class="dot"/></svg><span><b>YouTube</b>@narti_live</span></a>
+        <a class="tilt big gh" href="https://github.com/Narti-Live/lxfm-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="dot" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span><b>GitHub</b>code &amp; releases</span></a>
+      </div>
+
+      <div class="machine" aria-label="A dub techno pattern as LXFM-1 plays it">
+        <div class="lcd"><span><b>KICK</b> &nbsp;TUNE 45.0Hz &nbsp;DECAY 41 &nbsp;MORPH 30</span><span id="bpm">PLAY 120 BPM</span></div>
+        <div class="stage" id="stage"><canvas id="gl" aria-hidden="true"></canvas>
+          <div class="rows" id="rows"></div></div>
+        <div class="legend">A dub pattern from the built-in generator, eight voices by sixteen steps. Drag to turn it.</div>
+      </div>
+    </div>
+
+    <section id="kit">
+      <h2>The kit</h2>
+      <p>Eight voices, set up for dub techno. The kick is LXFM-1's own; every other voice is an 808 or 909 sound. Each voice is mixed to a fixed place under the kick, so turning knobs or randomising never throws the mix off. That makes it safe to play live.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Voice</th><th>Sound</th><th>Mix</th></tr></thead>
+        <tbody>
+          <tr><td>KICK</td><td>Tuned only between 43 and 55 Hz. Decay 150 ms to 1.5 s. MORPH blends the 808's round boom into the 909's punch.</td><td class="midi">0 dB</td></tr>
+          <tr><td>TOM</td><td>A low 808 tom, almost a second kick.</td><td class="midi">−8 dB</td></tr>
+          <tr><td>CHORD</td><td>The dub stab: an 808 clave ringing a minor 7th (or minor, fourths, sus, fifths) through a band-pass filter.</td><td class="midi">−6 dB</td></tr>
+          <tr><td>SNARE</td><td>808 or 909 snare, dark.</td><td class="midi">−10 dB</td></tr>
+          <tr><td>RIDE</td><td>808 cymbal, short and dark.</td><td class="midi">−18 dB</td></tr>
+          <tr><td>CL HH</td><td>808 or 909-style closed hat, filtered dull.</td><td class="midi">−17 dB</td></tr>
+          <tr><td>OP HH</td><td>808 or 909-style open hat; the closed hat cuts it off.</td><td class="midi">−15 dB</td></tr>
+          <tr><td>CLAP</td><td>808 or 909 clap with a long tail.</td><td class="midi">−9 dB</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols" style="margin-top:36px">
+        <div class="card tilt"><h3>Effects ready at power-on</h3><p>A dotted-1/8 dub delay with long, dark feedback; a big spring reverb; a little swing. The kick ducks the chord, ride and open hat. The kick stays dry while the chord goes heavily to the delay.</p></div>
+        <div class="card tilt"><h3>Patterns that stay in style</h3><p>The generator writes dub techno. The kick holds four on the floor and snare and clap land once a bar on 2 or 4. Hats sit off the beat and come and go, and chord stabs fall between the beats so the delay fills the space.</p></div>
+        <div class="card tilt"><h3>Levels you can trust</h3><p>With master at maximum a kick peaks around −14.5 dBFS. A limiter and soft clip keep even a deliberate worst case under full scale.</p></div>
+      </div>
+    </section>
+
+    <section id="panel">
+      <h2>No menu diving</h2>
+      <p>Black keys pick the voice, white keys are its 16 steps. Every voice's key flashes on its hits, the selected one stays lit, and a muted voice's key blinks fast.</p>
+      <div class="scroll"><div class="keys">
+        <div class="key"><b>1</b>KICK</div><div class="key"><b>2</b>TOM</div><div class="key"><b>3</b>CHORD</div>
+        <div class="key"><b>4</b>SNARE</div><div class="key"><b>5</b>RIDE</div><div class="key"><b>6</b>CL HH</div>
+        <div class="key"><b>7</b>OP HH</div><div class="key"><b>8</b>CLAP</div><div class="key"><b>M</b>MUTE</div>
+        <div class="key"><b>~</b>MUTATE</div><div class="key"><b>?</b>RANDOM ALL</div>
+      </div></div>
+      <div class="cols">
+        <div class="card tilt"><h3>OCT− and OCT+</h3><p>OCT− gives the selected voice a new sound. OCT+ gives it a new dub pattern.</p></div>
+        <div class="card tilt"><h3>MUTATE</h3><p>Small changes to every voice except the kick: knobs move a little, and one or two steps change. Backbeats and downbeats stay.</p></div>
+        <div class="card tilt"><h3>RANDOM ALL</h3><p>New sounds and new patterns for every voice at once.</p></div>
+        <div class="card tilt"><h3>Steps</h3><p>Up to 64 steps per voice. Hold a step and turn a knob to set probability, ratchet, accent and nudge. Tap the selected voice's key again for its next step page.</p></div>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <h2>99 patterns</h2>
+      <p>Tap SAVE, choose 01 to 99, then SAVE, LOAD or DELETE. Saved slots are filled and empty ones outlined. A pattern holds everything: sounds, steps, tempo and effects, so there is no separate kit to save. Loading works while it plays, and power-on loads the pattern you used last. A power cut during a save can't damage the other patterns.</p>
+    </section>
+
+    <section id="midi">
+      <h2>Sequence other gear</h2>
+      <p>In GLO &gt; SYSTEM, the MOUT setting sends every step as a MIDI note over USB: <span class="mono">BOTH</span> plays the FM-1 and sends; <span class="mono">SEQ</span> makes the FM-1 a silent sequencer. Notes follow the Vermona DRM1 MKIV's order and default notes on channel 10, so it plays a DRM1 straight away. Accented steps send velocity 127, others 96.</p>
+      <div class="scroll"><table class="midi">
+        <thead><tr><th>Voice</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead>
+        <tbody><tr><td>SEQ</td><td>KICK 36</td><td>DRUM 1 45</td><td>DRUM 2 50</td><td>MULTI 56</td><td>SNARE 38</td><td>HAT 1 44</td><td>HAT 2 49</td><td>CLAP 39</td></tr></tbody>
+      </table></div>
+      <p class="note" style="margin-top:18px">The FM-1 and most drum machines both have device-type USB ports, so put a USB MIDI host box between them (for example a Kenton MIDI USB Host or a Retrokits RK-006) and run a DIN cable to the drum machine's MIDI IN.</p>
+    </section>
+
+    <section id="app">
+      <h2>LXFM-1 Control for Android</h2>
+      <p>All eight voices' steps on one screen, mutes, play and tempo, and dice buttons for new beats and sounds, per voice or for all. Connect the phone to the FM-1 with a USB cable. Android 6.0 or newer.</p>
+      <a class="btn" href="downloads/LXFM-1-Control.apk">Download the app</a>
+    </section>
+
+    <section id="install">
+      <h2>Install</h2>
+      <ol class="steps">
+        <li>Download <a href="downloads/LXFM-1-1.4.fwsc">LXFM-1-1.4.fwsc</a>.</li>
+        <li>Connect the FM-1 to your computer by USB.</li>
+        <li>Open M-Flasher+ and flash the file, the same way as an official update.</li>
+        <li>The FM-1 restarts with the LXFM-1 screen. To go back, flash M-VAVE's official firmware the same way.</li>
+      </ol>
+      <p class="note">Install at your own risk. LXFM-1 is a community firmware, not made or supported by M-VAVE. Uploading your own samples is not available: the 99 patterns use that memory.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div><b style="color:var(--text)">Narti Live</b></div>
+    <div class="follow">
+      <a class="tilt big ig" href="https://www.instagram.com/narti_live/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" class="dot"/></svg><span><b>Instagram</b>@narti_live</span></a>
+      <a class="tilt big yt" href="https://youtube.com/@narti_live"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" class="dot"/></svg><span><b>YouTube</b>@narti_live</span></a>
+      <a class="tilt big gh" href="https://github.com/Narti-Live/lxfm-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="dot" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span><b>GitHub</b>code &amp; releases</span></a>
+    </div>
+    <p>LXFM-1 is free software under the GPL-3.0 licence, based on <a href="https://github.com/DeadActive/hortator">Hortator</a> (DeadActive), which is built on Felucca by Leo Kuroshita / Hügelton Instruments, with drum algorithms from Mutable Instruments (Émilie Gillet) and DaisySP. M-VAVE and FM-1 are trademarks of their owner; Vermona and DRM1 of theirs. This project is not affiliated with either.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
